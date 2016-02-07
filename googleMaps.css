@@ -1,0 +1,25 @@
+/*googleMaps.css*/
+
+html, body { height: 100%; margin: 0; padding: 0; }
+
+/*#map { height: 100%; }*/
+
+
+.myMap {
+    display:inline-block;
+    height:80vh;
+    width:60vh;
+    
+    z-index:-1;
+    
+    border:3px solid gray;
+    border-radius:8px;
+    margin:auto;
+}
+
+.myMap2 {
+    display:inline-block;
+    height:200px;
+    width:200px;
+    z-index:10;
+}

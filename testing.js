@@ -30,7 +30,8 @@ app.controller("appController",["$scope",function($scope){
     var oldMarker = new google.maps.Marker({position:google.maps.LatLng(0,0)});
 
 	var map;
-         function initMap() {
+    
+    function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
                center: {lat:39.7571357, lng: -105.028466},
                zoom: 11
@@ -63,7 +64,8 @@ app.controller("appController",["$scope",function($scope){
     
 	s.consoleCity = function(){
 		console.log(s.searchCity);
-        //make below function an IIFE 
+        
+        //make below function an IIFE so it executes when consoleCity does
         (function codeAddress() {
             var address = s.searchCity;
             
@@ -78,7 +80,7 @@ app.controller("appController",["$scope",function($scope){
                     //remove the old marker
                     oldMarker.setMap(null);
                     //put the new position marker in
-                     var marker = new google.maps.Marker({
+                     marker = new google.maps.Marker({
                          position: results[0].geometry.location,
                          title:"Hello World!"
                         });
@@ -90,9 +92,21 @@ app.controller("appController",["$scope",function($scope){
                 } else {
                         alert("Could not resolve the address.\n " + status);
                 }
+                
+                marker.addListener('click', toggleBounce);
             });
   }());
 
+
+        function toggleBounce() {
+          if (marker.getAnimation() !== null) {
+            marker.setAnimation(null);
+          } else {
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+          }
+        }
+
+        
         //reset the field
         s.searchCity="";
 

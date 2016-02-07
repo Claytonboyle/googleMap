@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html ng-app="googleMap">
   <head>
-    <link rel="stylesheet" type="text/css" href="googleMaps.css">
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.js"></script>
      <script 
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5ylZNoESDoX9aOsHGMwc-91sK-YpfzQg">
     </script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="googleMaps.css">
   
       <!--<script type="text/javascript" src="lodash.js"></script>
       
@@ -20,6 +22,19 @@
   </head>
     
   <body ng-controller="appController">
+      
+  <div class="myContainer">
+      <div class="container-fluid fart">
+           <form class="navbar-form navbar-left" role="search">
+               <div class="form-group">
+                  <input ng-model="searchCity" type="text" class="form-control" placeholder="Search">
+               </div>
+              <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+      </div>
+    </body>
+
+
     <div id="map" class="myMap"></div>
 
     <button ng-click="newCenter()">Center</button>

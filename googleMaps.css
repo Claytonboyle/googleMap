@@ -7,17 +7,27 @@ html, body { height: 100%; margin: 0; padding: 0; }
 
 .myMap {
     display:inline-block;
-    height:80vh;
-    width:60vh;
+    height:100%;
+    width:100%;
     
     border:3px solid gray;
-    border-radius:8px;
+    
+    border-bottom-right-radius:8px;
+    border-bottom-left-radius:8px;
+
     margin:auto;
 }
 
-.myMap2 {
-    display:inline-block;
-    height:200px;
-    width:200px;
-    z-index:10;
+
+.fart {
+    /*width:60vh;*/
+    border:3px solid green;
+
+    border-top-right-radius:8px;
+    border-top-left-radius:8px;
+}
+
+.myContainer {
+    width:60vh;
+    height:80vh;
 }

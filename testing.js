@@ -41,7 +41,13 @@ app.controller("appController",["$scope",function($scope){
 
 		// map["center"] = {lat:33, lng: -90};
 		// initMap({lat:33, lng: -90});
-		map.setCenter({lat:39, lng: -90});
+
+		var randLat,randLong;
+
+		randLat = Math.random()*180 -90;
+		randLong = Math.random()*360 -180;
+		map.setCenter({lat:randLat, lng: randLong});
+		console.log(randLat,randLong);
 		
 
 	}	

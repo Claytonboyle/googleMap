@@ -10,7 +10,7 @@ html, body { height: 100%; margin: 0; padding: 0; }
     height:100%;
     width:100%;
     
-    border:3px solid gray;
+    border:3px solid green;
     
     border-bottom-right-radius:8px;
     border-bottom-left-radius:8px;
@@ -20,7 +20,7 @@ html, body { height: 100%; margin: 0; padding: 0; }
 
 
 .fart {
-    /*width:60vh;*/
+    width:100%;
     border:3px solid green;
 
     border-top-right-radius:8px;

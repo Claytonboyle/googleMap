@@ -10,8 +10,6 @@ html, body { height: 100%; margin: 0; padding: 0; }
     height:80vh;
     width:60vh;
     
-    z-index:-1;
-    
     border:3px solid gray;
     border-radius:8px;
     margin:auto;

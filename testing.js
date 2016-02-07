@@ -23,6 +23,8 @@ app.controller("appController",["$scope",function($scope){
 
 	var s=$scope;
 
+	s.searchCity = "";
+
 	var map;
          function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
@@ -51,6 +53,11 @@ app.controller("appController",["$scope",function($scope){
 		
 
 	}	
+
+	s.consoleCity = function(){
+		console.log(s.searchCity);
+
+	}
 
 
 }]);

@@ -39,8 +39,8 @@ html, body { height: 100%; margin: 0; padding: 0; }
     display:inline-block;
 
     position:absolute;
-
-    height:33%;
+    padding-top:1em;
+    height:40%;
     width:98%;
     background-color:beige;
     top:+58vh; 
@@ -51,4 +51,15 @@ html, body { height: 100%; margin: 0; padding: 0; }
 
 .autoMargin {
      margin:auto; 
+}
+
+.infoIcon {
+    /*set icon sizes*/
+     width: 60px;
+    height: 60px;
+    border: 1px solid #73AD21;
+    border-radius:5px;
+    padding:.3em;
+
+
 }

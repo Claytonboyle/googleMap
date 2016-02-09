@@ -24,7 +24,7 @@
     
   </head>
     
-  <body ng-controller="appController">
+  <body ng-controller="appController" ng-click="bodyClick()">
       
   <div class="myContainer">
       <div class="container-fluid search">
@@ -39,11 +39,14 @@
 
          <div id="map" class="myMap"></div>
       <div class="autoMargin">
-
-        <div class="infoBox" ng-show="infoActive">
+      <!---add licck event to catch event before bubbling up-->
+        <div class="infoBox" ng-show="infoActive" ng-click="stopPropagation()">
+          
+          <img src='{{iconPath}}' class="infoIcon"/>
           THIS IS A SAMPLE <br/>
           {{housePointer}}
         </div>
+
       </div> 
 
        {{searchCity}}

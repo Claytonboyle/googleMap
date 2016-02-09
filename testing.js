@@ -38,10 +38,13 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
 
     //keep track of last opened window
     var openWindow = new google.maps.InfoWindow()
-    //infoBox once more info button is clicked in info window on marker
+    //infoBox show/hide once more info button is clicked in info window on marker
     s.infoActive = false;
-
+    //create placeholder for map object
 	var map;
+   
+    //house or apt icon shown
+    s.iconPath="home.png";
     
     function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
@@ -59,6 +62,14 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
 
 	console.log(map);
 
+    s.bodyClick=function(){
+        console.log("WE ARE CLICKING");
+        s.infoActive=false;}
+
+    //call this when we don't want the click to bubble up to body   
+    s.stopPropagation = function(){
+            event.stopPropagation();
+    }
 
 	s.newCenter= function(){
 	// 	console.log(map);
@@ -193,21 +204,30 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
             house["MLS Number"]+
             '</strong></h5>'+
             '</div>'+
-            '<button onclick="angular.element(this).scope().testButton('+ house["MLS Number"] + ')">More Info</button>';
+            '<button onclick="angular.element(this).scope().moreInfoButton('+ house["MLS Number"] + ')">More Info</button>';
 
         return stringContent;
 
     }
 
     //BUTTON FOR THE INFO POP UP
-    s.testButton = function(){
+    s.moreInfoButton = function(){
+        event.stopPropagation();
         console.log("Non-ang: THIS SHIT IS WORKING!! "+ arguments[0]);
+       
         var mls = arguments[0];
-
         s.$apply( function(){
-            s.position = s.positionFind(mls);
+            
+            s.iconPath
 
+            s.position = s.positionFind(mls);
             s.housePointer = s.angHouses[s.position];
+
+            if (s.housePointer["Type"].includes("Detached" || "detached"))
+                s.iconPath="home.png";
+            else 
+                s.iconPath="townhome.jpg"
+            
             //console.log(s.housePointer);
             
             s.infoActive = true;
@@ -246,7 +266,11 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
 
 }]);//end controller
 
+/*
 
+    use $event.stopPropogation in the infoWindow 
+
+*/
 
 /*
 

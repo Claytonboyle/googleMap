@@ -7,12 +7,7 @@ app.factory("houseArrays",["$timeout",function($timeout){
         
     
        var angHouses = sampleHouses;
-        //we need to add lat and long to each fucking one
-       var geocoder = new google.maps.Geocoder();
-       var address = "";
-       var tasks=[];
-    
-        
+       
 
         return {
             fakeDB:angHouses,
@@ -32,17 +27,17 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
 
 
 	var s=$scope;
+    console.log("scope: ",s);
     s.angHouses = houseArrays["fakeDB"];
-
-    console.log("First house:" + s.angHouses[0]);
-
-
 	s.searchCity = "";
         //below I create a new geocoder object
     var geocoder = new google.maps.Geocoder();
     //below I create a new marker obj, that is used to delete the previous person marker
     var oldPersonMarker = new google.maps.Marker({position:google.maps.LatLng(0,0)});
     var personMarker=oldPersonMarker;
+
+    //keep track of last opened window
+    var openWindow = new google.maps.InfoWindow()
 
 	var map;
     
@@ -139,17 +134,115 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
 
 	   }
 
-    /* Add an array of markers to display for testing*/
-    
-    
-   
+    /* Add an array of markers to display for testing
+    eventually we need to have some user selected options*/
 
-}]);
+    var displayHouseMarker = new google.maps.Marker({position:google.maps.LatLng(0,0)});
+    var displayMarkerArray = [];
+
+    for (var i=1;i<s.angHouses.length;i++){
+        (function(){
+            var house = s.angHouses[i];
+            var lat = house["Latitude"];
+            var lng = house["Longitude"];
+            
+            console.log ("house ",house["Latitude"]," ",house["Longitude"]);
+            var displayHouseMarker = new google.maps.Marker({
+                                position:{lat:lat,
+                                          lng:lng},
+                                    title:house["MLS Number"],
+                                     });
+            
+            displayHouseMarker.addListener('click', function(){
+                //close the previous inforwindow if still open
+
+                openWindow.close();
+                
+                //call the display house marker
+                showMLS(house,displayHouseMarker);
+            });
+            // can add infor window to the actual marker before pushing to array rather than creating it on click
+            var contentString = createContentString(house);
+
+            
+
+            displayHouseMarker.infowindow = new google.maps.InfoWindow({
+                        content: contentString,
+                       });
+
+            displayMarkerArray.push(displayHouseMarker);
+        })();//end IIFE
+
+    }
+
+    for (pos in displayMarkerArray){
+        displayMarkerArray[pos].setMap(map);
+    }
+
+    //here we can edit what going in the info window box
+    function createContentString(house) {
+        // var stringContent = "MLS# "+house["MLS Number"]+"\n Price: "+ house["List Price"];
+        s.house=house;
+        var stringContent = '<div>'+  
+            '<h5><strong> MLS #'+
+            house["MLS Number"]+
+            '</strong></h5>'+
+            '</div>'+
+            '<button onclick="angular.element(this).scope().testButton('+ house["MLS Number"] + ')">More Info</button>';
+
+        return stringContent;
+
+    }
+
+    //BUTTON FOR THE INFO POP UP
+    s.testButton = function(){
+        console.log("Non-ang: THIS SHIT IS WORKING!! "+ arguments[0]);
+        var mls = arguments[0];
+
+        s.$apply( function(){
+            s.position = s.positionFind(mls);
+
+            s.housePointer = s.angHouses[s.position];
+            console.log(s.housePointer);
+            alert(JSON.stringify(s.housePointer));
+
+        });
+
+        //wrap anything, since we're in the  in s.$apply (function(){
+               //my stuff  }
+    }
+
+    s.positionFind = function(mls){
+        for (var i=0;i<s.angHouses.length;i++){
+            if (s.angHouses[i]["MLS Number"]==mls){
+                return s.angHouses.indexOf(s.angHouses[i])
+            }
+
+        }
+    }
+
+    function showMLS (house,displayHouseMarker){
+        console.log("MLS OF SELECTED PIN: ", house["MLS Number"]," ",house["List Price"],"POS IN ARRAY: ",s.angHouses.indexOf(house));
+      
+        displayHouseMarker.infowindow.open(map,displayHouseMarker);
+
+        s.$apply();
+
+        openWindow = displayHouseMarker.infowindow;
+        //close the window after 10 seconds no matter what
+        // setTimeout(function () { openWindow.close(); }, 10000);
+
+    }
+
+
+
+}]);//end controller
 
 
 
 /*
 
+    var tasks=[];
   for (var i=1;i<20;i++)
             {
             

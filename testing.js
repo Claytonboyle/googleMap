@@ -6,62 +6,13 @@ var app = angular.module("googleMap",[]);
 app.factory("houseArrays",["$timeout",function($timeout){
         
     
-       var angHouses = [];
+       var angHouses = sampleHouses;
         //we need to add lat and long to each fucking one
        var geocoder = new google.maps.Geocoder();
        var address = "";
        var tasks=[];
     
-
-        for (var i=1;i<20;i++)
-            {
-            
-(function(i){
-                tasks.push(function(cb){
-
-                
-                            
-                        console.log("i "+i);
-                            var house = sampleHouses[i];
-                            delete house['FIELD1'];
-                            delete house['FIELD2'];
-
-                            address = house['Address']+" "+house['City']+" "+house['Zip'];
-
-                            geocoder.geocode( { 'address': address}, function(results, status) {
-
-                                console.log("Are we in here?", google.maps.GeocoderStatus);
-
-                                if (google.maps.GeocoderStatus.OVER_QUERY_LIMIT != "OVER_QUERY_LIMIT") {
-
-                                   house["Latitude"]=results[0].geometry.location.lat(); //mayber invoke again
-                                   house["Longitutde"]=results[0].geometry.location.lng();
-
-                                   console.log("Lat long entered! Success.");
-
-
-                                } else {
-
-                                            console.log("Failed resolve address.\n " + status);
-                                }
-
-                                angHouses.push(house);
-
-                                $timeout(function(){
-                                    cb();
-                                },1500);
-
-                            });
-                 })//total pushed
-                                        })(i)
-
-             } //end for loop
-    
-        async.series(tasks,function(){
-            console.log("FINISHED");});
-
-            console.log("taks "+tasks.length,tasks[0]);
-            console.log("sampleHouses length: " + sampleHouses.length);
+        
 
         return {
             fakeDB:angHouses,
@@ -186,11 +137,78 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
         //reset the field
         s.searchCity="";
 
-	}
+	   }
 
+    /* Add an array of markers to display for testing*/
+    
+    
    
 
 }]);
+
+
+
+/*
+
+  for (var i=1;i<20;i++)
+            {
+            
+                (function(i){
+                    tasks.push(function(cb){
+
+                
+                            
+                        console.log("i "+i);
+                            var house = sampleHouses[i];
+                            delete house['FIELD1'];
+                            delete house['FIELD2'];
+
+                            address = house['Address']+" "+house['City']+" "+house['Zip'];
+
+                            geocoder.geocode( { 'address': address}, function(results, status) {
+
+                                console.log("Are we in here?", google.maps.GeocoderStatus);
+
+                                if (google.maps.GeocoderStatus.OVER_QUERY_LIMIT != "OVER_QUERY_LIMIT") {
+
+                                   house["Latitude"]=results[0].geometry.location.lat(); //mayber invoke again
+                                   house["Longitutde"]=results[0].geometry.location.lng();
+
+                                   console.log("Lat long entered! Success.");
+
+
+                                } else {
+
+                                            console.log("Failed resolve address.\n " + status);
+                                }
+
+                                angHouses.push(house);
+
+                                $timeout(function(){
+                                    cb();
+                                },1500);
+
+                            });
+                 })//total pushed
+                                        })(i)
+
+             } //end for loop
+    
+        async.series(tasks,function(){
+            console.log("FINISHED");});
+
+            console.log("taks "+tasks.length,tasks[0]);
+            console.log("sampleHouses length: " + sampleHouses.length);
+*/
+
+
+
+
+
+
+
+
+
 
 
 

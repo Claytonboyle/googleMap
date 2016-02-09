@@ -38,6 +38,8 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
 
     //keep track of last opened window
     var openWindow = new google.maps.InfoWindow()
+    //infoBox once more info button is clicked in info window on marker
+    s.infoActive = false;
 
 	var map;
     
@@ -206,8 +208,9 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
             s.position = s.positionFind(mls);
 
             s.housePointer = s.angHouses[s.position];
-            console.log(s.housePointer);
-            alert(JSON.stringify(s.housePointer));
+            //console.log(s.housePointer);
+            
+            s.infoActive = true;
 
         });
 
@@ -231,7 +234,7 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
       
         displayHouseMarker.infowindow.open(map,displayHouseMarker);
 
-        s.$apply();
+        //s.$apply();
 
         openWindow = displayHouseMarker.infowindow;
         //close the window after 10 seconds no matter what

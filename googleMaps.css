@@ -19,7 +19,7 @@ html, body { height: 100%; margin: 0; padding: 0; }
 }
 
 
-.fart {
+.search {
     width:100%;
     border:3px solid green;
 
@@ -28,6 +28,27 @@ html, body { height: 100%; margin: 0; padding: 0; }
 }
 
 .myContainer {
+    position:relative;
+
     width:60vh;
     height:80vh;
+}
+
+.infoBox {
+    text-align:center;
+    display:inline-block;
+
+    position:absolute;
+
+    height:33%;
+    width:98%;
+    background-color:beige;
+    top:+58vh; 
+    left:.5vw; 
+    border-radius:8px;
+    border:1px solid gray;
+}
+
+.autoMargin {
+     margin:auto; 
 }

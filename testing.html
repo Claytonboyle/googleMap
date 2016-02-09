@@ -27,25 +27,31 @@
   <body ng-controller="appController">
       
   <div class="myContainer">
-      <div class="container-fluid fart">
+      <div class="container-fluid search">
            <form class="navbar-form navbar-left" role="search">
                <div class="form-group">
                   <input ng-model="searchCity" type="text" class="form-control" placeholder="Search">
-               </div>
+               </div> <!--end form group-->
               <button ng-click="consoleCity()" type="submit" class="btn btn-default">Submit</button>
-            </form>
-      </div>
-    </body>
+          </form>
+      </div> <!--end header box-->
 
 
-    <div id="map" class="myMap"></div>
+         <div id="map" class="myMap"></div>
+      <div class="autoMargin">
 
-    {{searchCity}}
+        <div class="infoBox" ng-show="infoActive">
+          THIS IS A SAMPLE <br/>
+          {{housePointer}}
+        </div>
+      </div> 
 
-    <button ng-click="newCenter()">Center</button>
+       {{searchCity}}
+
+        <button ng-click="newCenter()">Center</button>
  
       
-
+  </div> <!--end screen myContainer-->
 
   </body>
 </html>

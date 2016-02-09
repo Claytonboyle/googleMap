@@ -50,6 +50,11 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
 
 	initMap();
 
+    //adds event so that when a user clicks anywhere on the map, it closes the open info window
+    google.maps.event.addListener(map, "click", function(event) {
+         openWindow.close();
+        });
+
 	console.log(map);
 
 
@@ -91,8 +96,6 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
 
 
                         }
-                        console.log(results);
-                        console.log("item at 0 in results array: "+typeof results);
                        
                         map.setCenter(results[0].geometry.location);
                         map.setZoom(11);
@@ -207,6 +210,8 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
             alert(JSON.stringify(s.housePointer));
 
         });
+
+        //this should ideally have a div pop up into the lower half of the screen with more info, and ability to add to favorites list for the client
 
         //wrap anything, since we're in the  in s.$apply (function(){
                //my stuff  }

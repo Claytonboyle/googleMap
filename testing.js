@@ -3,13 +3,81 @@
 var app = angular.module("googleMap",[]);
 
 	
-
+app.factory("houseArrays",["$timeout",function($timeout){
         
 
+        var angHouses = [];
+
+        //we need to add lat and long to each fucking one
+       var geocoder = new google.maps.Geocoder();
+       
+
+       var address = "";
+       var i=0;
+
+
+
+       while(i<sampleHouses.length){
         
+        if (i>500){
+            break;
+        }
+
+        (function(i){
+
+            $timeout(function(){
+                    var house = sampleHouses[i];
+                    delete house['FIELD1'];
+                    delete house['FIELD2'];
+                 
+                    address = house['Address']+" "+house['City']+" "+house['Zip'];
+
+                    geocoder.geocode( { 'address': address}, function(results, status) {
+                        
+                        console.log("Are we in here?", google.maps.GeocoderStatus);
+                        
+                        if (status == google.maps.GeocoderStatus.OK) {
+                               
+                           house["Latitude"]=results[0].geometry.location.lat; //mayber invoke again
+                           house["Longitutde"]=results[0].geometry.location.lng;
+
+                           console.log("Lat long entered!");
+                           // i++;
+                           // console.log(house);
+
+                        } else {
+                                
+                                    // i++;// alert("Could not resolve the address.\n " + status);
+                        }
+
+                        angHouses.push(house);
+                        
+                        // personMarker.addListener('click', toggleBounce);
+                    });
+
+                    console.log("inside: "+ i );
+            },1100);
+
+             ;   })(++i)
+
+
+                console.log("outside: "+ i);
+
+
+           
+
+        } //end for loop
+
+        console.log("angHouses "+angHouse.length)
+
+        return {
+            fakeDB:angHouses,
+
+            factoryGeoCoder:function(map){}
+        }
 
         // var newMap = function (center,zoom){
-
+}]);
         // 	map = new google.maps.Map(document.getElementById('map'), {
         //        center: center,
         //        zoom: zoom
@@ -19,15 +87,23 @@ var app = angular.module("googleMap",[]);
 
         
 
-app.controller("appController",["$scope",function($scope){
+app.controller("appController",["$scope","houseArrays",function($scope,houseArrays){
+
+    
+
 
 	var s=$scope;
+    s.angHouses = houseArrays["fakeDB"];
+
+    console.log("First house:" + s.angHouses[0]);
+
 
 	s.searchCity = "";
         //below I create a new geocoder object
     var geocoder = new google.maps.Geocoder();
     //below I create a new marker obj, that is used to delete the previous person marker
-    var oldMarker = new google.maps.Marker({position:google.maps.LatLng(0,0)});
+    var oldPersonMarker = new google.maps.Marker({position:google.maps.LatLng(0,0)});
+    var personMarker=oldPersonMarker;
 
 	var map;
     
@@ -74,35 +150,47 @@ app.controller("appController",["$scope",function($scope){
                 console.log("Are we in here?");
                 
                 if (status == google.maps.GeocoderStatus.OK) {
-                        console.log(results[0].geometry.location);
+                       
+                        console.log("Results[0]"+results[0]);
+                        for (attrib in results[0]){
+                            console.log(results[0][attrib],attrib);
+
+
+                        }
+                        console.log(results);
+                        console.log("item at 0 in results array: "+typeof results);
+                       
                         map.setCenter(results[0].geometry.location);
                         map.setZoom(11);
                     //remove the old marker
-                    oldMarker.setMap(null);
+                    oldPersonMarker.setMap(null);
                     //put the new position marker in
-                     marker = new google.maps.Marker({
+                     personMarker = new google.maps.Marker({
                          position: results[0].geometry.location,
                          title:"Hello World!"
                         });
                     //set oldmarker to the current marker
-                    oldMarker = marker;
-                    console.log(marker);
+                    oldPersonMarker = personMarker;
+                    console.log(personMarker);
                 // To add the marker to the map, call setMap();
-                    marker.setMap(map);
+                    personMarker.setMap(map);
                 } else {
-                        alert("Could not resolve the address.\n " + status);
+                        if (s.searchCity=="")
+                            ;
+                        else
+                            alert("Could not resolve the address.\n " + status);
                 }
                 
-                marker.addListener('click', toggleBounce);
+                personMarker.addListener('click', toggleBounce);
             });
   }());
 
 
         function toggleBounce() {
-          if (marker.getAnimation() !== null) {
-            marker.setAnimation(null);
+          if (personMarker.getAnimation() !== null) {
+            personMarker.setAnimation(null);
           } else {
-            marker.setAnimation(google.maps.Animation.BOUNCE);
+            personMarker.setAnimation(google.maps.Animation.BOUNCE);
           }
         }
 

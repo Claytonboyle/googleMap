@@ -5,83 +5,71 @@ var app = angular.module("googleMap",[]);
 	
 app.factory("houseArrays",["$timeout",function($timeout){
         
-
-        var angHouses = [];
-
+    
+       var angHouses = [];
         //we need to add lat and long to each fucking one
        var geocoder = new google.maps.Geocoder();
-       
-
        var address = "";
-       var i=0;
+       var tasks=[];
+    
+
+        for (var i=1;i<20;i++)
+            {
+            
+(function(i){
+                tasks.push(function(cb){
+
+                
+                            
+                        console.log("i "+i);
+                            var house = sampleHouses[i];
+                            delete house['FIELD1'];
+                            delete house['FIELD2'];
+
+                            address = house['Address']+" "+house['City']+" "+house['Zip'];
+
+                            geocoder.geocode( { 'address': address}, function(results, status) {
+
+                                console.log("Are we in here?", google.maps.GeocoderStatus);
+
+                                if (google.maps.GeocoderStatus.OVER_QUERY_LIMIT != "OVER_QUERY_LIMIT") {
+
+                                   house["Latitude"]=results[0].geometry.location.lat(); //mayber invoke again
+                                   house["Longitutde"]=results[0].geometry.location.lng();
+
+                                   console.log("Lat long entered! Success.");
 
 
+                                } else {
 
-       while(i<sampleHouses.length){
-        
-        if (i>500){
-            break;
-        }
+                                            console.log("Failed resolve address.\n " + status);
+                                }
 
-        (function(i){
+                                angHouses.push(house);
 
-            $timeout(function(){
-                    var house = sampleHouses[i];
-                    delete house['FIELD1'];
-                    delete house['FIELD2'];
-                 
-                    address = house['Address']+" "+house['City']+" "+house['Zip'];
+                                $timeout(function(){
+                                    cb();
+                                },1500);
 
-                    geocoder.geocode( { 'address': address}, function(results, status) {
-                        
-                        console.log("Are we in here?", google.maps.GeocoderStatus);
-                        
-                        if (status == google.maps.GeocoderStatus.OK) {
-                               
-                           house["Latitude"]=results[0].geometry.location.lat; //mayber invoke again
-                           house["Longitutde"]=results[0].geometry.location.lng;
+                            });
+                 })//total pushed
+                                        })(i)
 
-                           console.log("Lat long entered!");
-                           // i++;
-                           // console.log(house);
+             } //end for loop
+    
+        async.series(tasks,function(){
+            console.log("FINISHED");});
 
-                        } else {
-                                
-                                    // i++;// alert("Could not resolve the address.\n " + status);
-                        }
-
-                        angHouses.push(house);
-                        
-                        // personMarker.addListener('click', toggleBounce);
-                    });
-
-                    console.log("inside: "+ i );
-            },1100);
-
-             ;   })(++i)
-
-
-                console.log("outside: "+ i);
-
-
-           
-
-        } //end for loop
-
-        console.log("angHouses "+angHouse.length)
+            console.log("taks "+tasks.length,tasks[0]);
+            console.log("sampleHouses length: " + sampleHouses.length);
 
         return {
             fakeDB:angHouses,
 
             factoryGeoCoder:function(map){}
         }
-
-        // var newMap = function (center,zoom){
 }]);
-        // 	map = new google.maps.Map(document.getElementById('map'), {
-        //        center: center,
-        //        zoom: zoom
-        //     });
+        
 
 
 

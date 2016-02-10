@@ -171,16 +171,12 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
             
             displayHouseMarker.addListener('click', function(){
                 //close the previous inforwindow if still open
-
                 openWindow.close();
-                
                 //call the display house marker
                 showMLS(house,displayHouseMarker);
             });
-            // can add infor window to the actual marker before pushing to array rather than creating it on click
+            // can add info window to the actual marker before pushing to array rather than creating it on click
             var contentString = createContentString(house);
-
-            
 
             displayHouseMarker.infowindow = new google.maps.InfoWindow({
                         content: contentString,
@@ -218,10 +214,10 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
         var mls = arguments[0];
         s.$apply( function(){
             
-            s.iconPath
-
             s.position = s.positionFind(mls);
             s.housePointer = s.angHouses[s.position];
+            //calls createInfoBoxAddressString to concat the address info
+            s.addressString = s.createInfoBoxAddressString(s.housePointer);
 
             if (s.housePointer["Type"].includes("Detached" || "detached"))
                 s.iconPath="home.png";
@@ -229,7 +225,7 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
                 s.iconPath="townhome.jpg"
             
             //console.log(s.housePointer);
-            
+            //this shows the info box on screen - do all logic before showing it
             s.infoActive = true;
 
         });
@@ -249,6 +245,18 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
         }
     }
 
+    s.createInfoBoxAddressString = function (housePointer){
+        //for the address
+        return (housePointer["Street #"]+" "+
+        housePointer["Street Dir"]+" "+
+        housePointer["Street Name"]+" "+
+        housePointer["Street Type"]+" "+
+        housePointer["Unit #"]  +" "+       //only if populated
+        housePointer["City"] +" "+
+        housePointer["Zip Code"]);
+
+    }
+
     function showMLS (house,displayHouseMarker){
         console.log("MLS OF SELECTED PIN: ", house["MLS Number"]," ",house["List Price"],"POS IN ARRAY: ",s.angHouses.indexOf(house));
       
@@ -265,6 +273,8 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
 
 
 }]);//end controller
+
+//add a div around the map and the info window for proper positioning
 
 /*
 

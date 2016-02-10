@@ -29,7 +29,7 @@ html, body { height: 100%; margin: 0; padding: 0; }
 
 .myContainer {
     position:relative;
-
+    /*set to full screen on mobile*/
     width:60vh;
     height:80vh;
 }

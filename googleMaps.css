@@ -44,15 +44,14 @@ html, body { height: 100%; margin: 0; padding: 0; }
 }
 
 .infoBox {
-/*    text-align:center;*/
     
-    display:inline-block;
+   /* display:inline-block;*/
     position:absolute;
     padding:1em;
     height:25%;
     width:98%;
     background-color:rgba(245,245,220,0.85);
-    /*    background-color:beige; */
+  
     top:+58%; 
     left:1%; 
     border-radius:8px;
@@ -70,7 +69,7 @@ html, body { height: 100%; margin: 0; padding: 0; }
 }
 
 .autoMargin {
-     margin:auto; 
+     /*margin:auto; */
 }
 
 .topLeftInfoIcon {
@@ -79,13 +78,32 @@ html, body { height: 100%; margin: 0; padding: 0; }
     
 }
 
+.infoBoxTitle {
+    text-align:center;
+    float:right;
+    height:100px;
+    width:84%;
+    margin:auto;
+    padding-top:10px;
+    border: 1px solid #73AD21;
+
+    border-radius:5px;
+}
+
+.infoBoxAddress {
+    font-size:160%;
+    color:gray;
+
+}
+
 .infoBoxPrice {
     font-size:200%;
-    margin-left:28%;
+    color:gray;
 }
 
 .infoIcon {
     /*set icon sizes*/
+    display:inline-block;
      width: 100px;
     height: 100px;
     border: 1px solid #73AD21;

@@ -27,6 +27,45 @@
   <body ng-controller="appController" ng-click="bodyClick()" class="setSize">
       
   <div class="myContainer">
+
+    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="index.php">Home</a></li>
+                <li><a href="about.php">About</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="contact.php">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
       <div class="container-fluid search">
            <form class="navbar-form navbar-left" role="search">
                <div class="form-group">
@@ -36,19 +75,24 @@
           </form>
       </div> <!--end header box-->
 
-
          <div id="map" class="myMap"></div>
+
       <div class="autoMargin">
       <!---add licck event to catch event before bubbling up-->
         <div class="infoBox" ng-show="infoActive" ng-click="stopPropagation()">
-          
-            <div class="topLeftInfoIcon"><img src='{{iconPath}}' class="infoIcon"/></div>
-            
-          <span class="infoBoxPrice"><strong>${{housePointer["List Price"]}}</strong></span></h4> <br/>
-          {{addressString}}
-        </div>
 
-      </div> 
+          <div>
+            <div class="topLeftInfoIcon"><img src='{{iconPath}}' class="infoIcon"/></div>
+        
+          <div class="infoBoxTitle">
+            <span class="infoBoxPrice"><strong>${{housePointer["List Price"]}}
+            </strong></span><br><strong class="infoBoxAddress">{{addressString}}</strong>
+
+          </div><!---end box title-->
+        </div> <!--end infobox-->
+      </div>
+
+      </div> <!--end autoMargin-->
 
        <!--{{searchCity}}       we don't need this to debug anymore
 

@@ -192,8 +192,13 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
 
     }
 
-    for (pos in displayMarkerArray){
-        displayMarkerArray[pos].setMap(map);
+    //re-enable this function below, just minimizing google marker hits
+    // for (pos in displayMarkerArray){
+    //     displayMarkerArray[pos].setMap(map);
+    // }
+
+    for (var i=0;i<15;i++){
+        displayMarkerArray[i].setMap(map);
     }
 
     //here we can edit what going in the info window box
@@ -256,7 +261,7 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
         return (housePointer["Street #"]+" "+
         housePointer["Street Dir"]+" "+
         housePointer["Street Name"]+" "+
-        housePointer["Street Type"]+" "+
+        housePointer["Street Type"]+", "+
         housePointer["Unit #"]  +" "+       //only if populated
         housePointer["City"] +" "+
         housePointer["Zip Code"]);

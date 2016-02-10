@@ -184,8 +184,10 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
             var contentString = createContentString(house);
 
             displayHouseMarker.infowindow = new google.maps.InfoWindow({
-                        content: contentString,
+                        // content: contentString,
+                        content:"fart",
                        });
+            displayHouseMarker.infowindow.setContent(contentString);
 
             displayMarkerArray.push(displayHouseMarker);
         })();//end IIFE
@@ -205,11 +207,11 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
     function createContentString(house) {
         // var stringContent = "MLS# "+house["MLS Number"]+"\n Price: "+ house["List Price"];
         s.house=house;
-        var stringContent = '<div>'+  
-            '<h3><strong>'+
-            ' $ '+
+        var stringContent = '<div class="infoWindowPrice">'+  
+            '<h4><strong>'+
+            ' $'+
             house["List Price"]+
-            '</strong></h3>'+
+            '</strong></h4>'+
             '</div>'+
             '<button class="infoButton" onclick="angular.element(this).scope().moreInfoButton('+ house["MLS Number"] + ')">More Info</button>';
 

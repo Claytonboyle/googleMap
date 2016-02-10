@@ -1,14 +1,20 @@
 /*googleMaps.css*/
 
+* {
+    box-sizing: border-box;
+}
+
 html, body { height: 100%; margin: 0; padding: 0; }
 
 .setSize {
    position:absolute;
     /*1334x750*/
-    min-height:1334px;
-    max-height:1334px;
-    min-width:750px;
-    max-width:750px;
+    min-height:889px;
+    max-height:889px;
+    min-width:500px;
+    max-width:500px;
+   /* height:100vh;
+    width:100vw*/
 }
 /*#map { height: 100%; }*/
 
@@ -16,7 +22,7 @@ html, body { height: 100%; margin: 0; padding: 0; }
 .myMap {
     position:relative;
     display:inline-block;
-    height:80%;
+    height:95%;
     width:100%;
     
     border:3px solid green;
@@ -52,7 +58,7 @@ html, body { height: 100%; margin: 0; padding: 0; }
     width:98%;
     background-color:rgba(245,245,220,0.85);
   
-    top:+58%; 
+    top:+72%; 
     left:1%; 
     border-radius:8px;
     border:1px solid gray;
@@ -62,9 +68,9 @@ html, body { height: 100%; margin: 0; padding: 0; }
     text-align:center;
     font-size:110%;
     font-style:bold;
-    margin-left:15%;
-    width:80%;
-    height:60%;
+    margin-left:20px;
+    margin-right:20px;
+    width:100px;
     border-radius:5px;
 }
 
@@ -78,35 +84,100 @@ html, body { height: 100%; margin: 0; padding: 0; }
     
 }
 
+.infoWindowPrice {
+    margin-left:35px;
+    margin-right:35px;
+}
+
 .infoBoxTitle {
     text-align:center;
     float:right;
-    height:100px;
+    height:65px;
     width:84%;
     margin:auto;
     padding-top:10px;
-    border: 1px solid #73AD21;
+    /*border: 1px solid #73AD21;*/
+    border: 1px solid gray;
+
+    background-color:rgba(205,0,0,0.7);
 
     border-radius:5px;
 }
 
 .infoBoxAddress {
-    font-size:160%;
-    color:gray;
+
+    font-size:100%;
+    color:white;
 
 }
 
 .infoBoxPrice {
-    font-size:200%;
-    color:gray;
+    font-size:130%;
+    color:white;
 }
 
 .infoIcon {
     /*set icon sizes*/
     display:inline-block;
-     width: 100px;
-    height: 100px;
-    border: 1px solid #73AD21;
+     width: 65px;
+    height: 65x;
+    /*border: 1px solid #73AD21;*/
+    border: 1px solid gray;
     border-radius:5px;
     padding:.3em;
 }
+
+.modal-dialog {
+    position: absolute;
+    width: 90%;
+    margin: 10;
+    margin-left: 5%;
+}
+
+.modal-backdrop {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+    background-color: #000;
+}
+
+
+
+/*DELETE ME WITH NEW NAV BAR*/
+.navbar-form {
+    padding: 0;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    border-top: 0;
+    border-bottom: 0;
+    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1), 0 1px 0 rgba(255, 255, 255, .1);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1), 0 1px 0 rgba(255, 255, 255, .1);
+}
+
+.btn-lg, .btn-group-lg > .btn {
+    padding: 0;
+    font-size: 18px;
+    line-height: 1.3333333;
+    border-radius: 6px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

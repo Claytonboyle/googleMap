@@ -2,12 +2,21 @@
 
 html, body { height: 100%; margin: 0; padding: 0; }
 
+.setSize {
+   position:absolute;
+    /*1334x750*/
+    min-height:1334px;
+    max-height:1334px;
+    min-width:750px;
+    max-width:750px;
+}
 /*#map { height: 100%; }*/
 
 
 .myMap {
+    position:relative;
     display:inline-block;
-    height:100%;
+    height:80%;
     width:100%;
     
     border:3px solid green;
@@ -30,36 +39,56 @@ html, body { height: 100%; margin: 0; padding: 0; }
 .myContainer {
     position:relative;
     /*set to full screen on mobile*/
-    width:60vh;
-    height:80vh;
+    width:100%;
+    height:100%;
 }
 
 .infoBox {
-    text-align:center;
+/*    text-align:center;*/
+    
     display:inline-block;
-
     position:absolute;
-    padding-top:1em;
-    height:40%;
+    padding:1em;
+    height:25%;
     width:98%;
-    background-color:beige;
-    top:+58vh; 
-    left:.5vw; 
+    background-color:rgba(245,245,220,0.85);
+    /*    background-color:beige; */
+    top:+58%; 
+    left:1%; 
     border-radius:8px;
     border:1px solid gray;
+}
+
+.infoButton {
+    text-align:center;
+    font-size:110%;
+    font-style:bold;
+    margin-left:15%;
+    width:80%;
+    height:60%;
+    border-radius:5px;
 }
 
 .autoMargin {
      margin:auto; 
 }
 
+.topLeftInfoIcon {
+    position:relative;
+    display:inline-block;
+    
+}
+
+.infoBoxPrice {
+    font-size:200%;
+    margin-left:28%;
+}
+
 .infoIcon {
     /*set icon sizes*/
-     width: 60px;
-    height: 60px;
+     width: 100px;
+    height: 100px;
     border: 1px solid #73AD21;
     border-radius:5px;
     padding:.3em;
-
-
 }

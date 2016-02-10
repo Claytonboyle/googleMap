@@ -29,6 +29,9 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
 	var s=$scope;
     console.log("scope: ",s);
     s.angHouses = houseArrays["fakeDB"];
+    
+    console.log(s.angHouses[1]);
+    
 	s.searchCity = "";
         //below I create a new geocoder object
     var geocoder = new google.maps.Geocoder();
@@ -45,11 +48,13 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
    
     //house or apt icon shown
     s.iconPath="home.png";
+    //what each map should zoom to
+    var standardZoom = 12;
     
     function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
                center: {lat:39.7571357, lng: -105.028466},
-               zoom: 11
+               zoom: standardZoom
             });
         }
 
@@ -82,7 +87,7 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
 		randLat = Math.random()*180 -90;
 		randLong = Math.random()*360 -180;
 		map.setCenter({lat:randLat, lng: randLong});
-        map.setZoom(11);
+        map.setZoom(standardZoom);
 		console.log(randLat,randLong);
 		
 
@@ -111,7 +116,7 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
                         }
                        
                         map.setCenter(results[0].geometry.location);
-                        map.setZoom(11);
+                        map.setZoom(standardZoom);
                     //remove the old marker
                     oldPersonMarker.setMap(null);
                     //put the new position marker in
@@ -196,11 +201,12 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
         // var stringContent = "MLS# "+house["MLS Number"]+"\n Price: "+ house["List Price"];
         s.house=house;
         var stringContent = '<div>'+  
-            '<h5><strong> MLS #'+
-            house["MLS Number"]+
-            '</strong></h5>'+
+            '<h3><strong>'+
+            ' $ '+
+            house["List Price"]+
+            '</strong></h3>'+
             '</div>'+
-            '<button onclick="angular.element(this).scope().moreInfoButton('+ house["MLS Number"] + ')">More Info</button>';
+            '<button class="infoButton" onclick="angular.element(this).scope().moreInfoButton('+ house["MLS Number"] + ')">More Info</button>';
 
         return stringContent;
 

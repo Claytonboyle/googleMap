@@ -9,15 +9,15 @@ app.factory("houseArrays",["$timeout",function($timeout){
        var angHouses = sampleHouses;
        var usersArray = [];
 
-       var UserModel = function(fname,lname,phone,email,preferences,login,password){
+       var UserModel = function(fname,lname,phone,email,preferences,login,favorites,blacklistlogin,password){
 
             this.fname=fname || "";
             this.lname=lname || "";
             this.phone=phone || "";
             this.email = email || "";
-            this.preferences = preferences;
-            this.login = login;
-            this.password = password;
+            this.preferences = preferences || {};
+            this.login = login || "guest";
+            this.password = password || "1234";
        }
 
        UserModel.prototype.userName = function(){
@@ -25,7 +25,7 @@ app.factory("houseArrays",["$timeout",function($timeout){
        }
 
 
-       var Preferences = function(minPrice,maxPrice,minBeds,minBaths,minTotalSF,propertyType){
+       var Preferences = function(minPrice,maxPrice,minBeds,minBaths,minTotalSF,propertyType,favorites,blacklist){
 
             this.minPrice = minPrice || 0;
             this.maxPrice = maxPrice || 0;
@@ -33,6 +33,9 @@ app.factory("houseArrays",["$timeout",function($timeout){
             this.minBaths = minBaths || 1;
             this.minTotalSF = minTotalSF || 100;
             this.propertyType = propertyType || "";
+
+            this.favorites = favorites || new Object();
+            this.blacklist = blacklist || new Object();
        }
        
 

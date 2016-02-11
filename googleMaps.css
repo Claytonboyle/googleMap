@@ -6,6 +6,11 @@
 
 html, body { height: 100%; margin: 0; padding: 0; }
 
+.spacer {
+    margin-left:5.1%;
+    margin-right:5.1%;
+}
+
 .setSize {
    position:absolute;
     /*1334x750*/
@@ -22,17 +27,23 @@ html, body { height: 100%; margin: 0; padding: 0; }
 .myMap {
     position:relative;
     display:inline-block;
-    height:95%;
+    height:100%;
     width:100%;
     
     border:3px solid green;
     
-    border-bottom-right-radius:8px;
-    border-bottom-left-radius:8px;
+    border-radius:8px;
 
     margin:auto;
 }
 
+
+.myNavBar {
+    z-index:10;
+    position:absolute;
+    top:0px;
+    background-color: rgba(245,245,220,0.85);
+}
 
 .search {
     width:100%;
@@ -132,6 +143,7 @@ html, body { height: 100%; margin: 0; padding: 0; }
     width: 90%;
     margin: 10;
     margin-left: 5%;
+    margin-top: 25%;
 }
 
 .modal-backdrop {
@@ -167,11 +179,31 @@ html, body { height: 100%; margin: 0; padding: 0; }
 }
 
 
+.modal-header {
+    padding: 10px;
+    border-bottom: 1px solid #e5e5e5;
+}
 
+.modal-footer {
+    padding: 10px;
+    padding-right: 15px;
+    text-align: right;
+    border-top: 1px solid #e5e5e5;
+}
 
+.modal-body {
+    position: relative;
+    padding: 15px;
+    padding-bottom: 5px;
+}
 
+.modal-title {
+    text-align:center;
+}
 
-
+.glyphicon {
+    font-size:xx-large;
+}
 
 
 

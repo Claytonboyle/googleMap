@@ -122,7 +122,7 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
                     //put the new position marker in
                      personMarker = new google.maps.Marker({
                          position: results[0].geometry.location,
-                         title:"Hello World!"
+                         title:"Here I Am!"
                         });
                     //set oldmarker to the current marker
                     oldPersonMarker = personMarker;
@@ -195,13 +195,13 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
     }
 
     //re-enable this function below, just minimizing google marker hits
-    // for (pos in displayMarkerArray){
-    //     displayMarkerArray[pos].setMap(map);
-    // }
-
-    for (var i=0;i<15;i++){
-        displayMarkerArray[i].setMap(map);
+    for (pos in displayMarkerArray){
+        displayMarkerArray[pos].setMap(map);
     }
+
+    // for (var i=0;i<15;i++){
+    //     displayMarkerArray[i].setMap(map);
+    //}
 
     //here we can edit what going in the info window box
     function createContentString(house) {

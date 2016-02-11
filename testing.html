@@ -40,16 +40,17 @@
 
                   
 
-      <div class="container-fluid search">
+      <div class="container-fluid search myNavBar">
 
         <ul class="nav nav-tabs">
-             <li role="presentation" ><a> <span class="glyphicon glyphicon-home" aria-hidden="true"></span> </a></li>
-              <li role="presentation"><a data-toggle="modal" data-target="#myModal"> <span class="glyphicon glyphicon-search" aria-hidden="true"></span> </a></li>
-              <li role="presentation"><a> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> </a></li>
-              <li role="presentation"><a> <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> </a></li>
+             <li role="presentation" class="spacer" ><a> <span class="glyphicon glyphicon-home" aria-hidden="true"></span> </a></li>
+              <li role="presentation" class="spacer"><a data-toggle="modal" data-target="#myModal"> <span class="glyphicon glyphicon-search" aria-hidden="true"></span> </a></li>
+              <li role="presentation" class="spacer"><a> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> </a></li>
+              <li role="presentation" class="spacer"><a> <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> </a></li>
         </ul>
 <!---------------------------------->
-               
+      </div>
+              
 
               <div id="myModal" class="modal fade" role="dialog">
                 <div class="modal-dialog modal-sm">
@@ -57,19 +58,23 @@
                   <!-- Modal content-->
                   <div class="modal-content">
                     <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title">Modal Header</h4>
+                      <h4 class="modal-title">Enter Address or City</h4>
                     </div>
                     <div class="modal-body">
-                      <p>Some text in the modal.</p>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                  </div>
+                        <div class="form-group">
 
+                              <input ng-model="searchCity" type="text" class="form-control" placeholder="Search">
+                         </div>  <!--end form group-->
+                    </div><!--end modal body-->
+                    
+                    <div class="modal-footer">
+                        
+                        <button ng-click="consoleCity()" type="submit" data-dismiss="modal" class="btn btn-default">Search</button>
+                    </div>
+                  </div><!--modal content-->
                 </div>
-              </div>
+
+            
 
                <!-- <div class="form-group">
                   <input ng-model="searchCity" type="text" class="form-control" placeholder="Search">

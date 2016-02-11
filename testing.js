@@ -27,6 +27,12 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
 
 
 	var s=$scope;
+    
+    //TESTING GROUND
+    s.TEST = function(){
+        alert("THUMBS UP MOTHERFUCKER");
+    }
+
     console.log("scope: ",s);
     s.angHouses = houseArrays["fakeDB"];
     
@@ -67,7 +73,7 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
         });
 
 	console.log(map);
-    
+
     s.closeInfoWindow = function(){
         openWindow.close();
     }
@@ -199,13 +205,13 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
     }
 
     //re-enable this function below, just minimizing google marker hits
-    for (pos in displayMarkerArray){
-        displayMarkerArray[pos].setMap(map);
-    }
+    // for (pos in displayMarkerArray){
+    //     displayMarkerArray[pos].setMap(map);
+    // }
 
-    // for (var i=0;i<15;i++){
-    //     displayMarkerArray[i].setMap(map);
-    //}
+    for (var i=0;i<15;i++){
+        displayMarkerArray[i].setMap(map);
+    }
 
     //here we can edit what going in the info window box
     function createContentString(house) {
@@ -289,6 +295,10 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
         // setTimeout(function () { openWindow.close(); }, 10000);
 
     }
+
+    s.addComma =function (num){
+        if (num!=undefined)
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
 
 
 

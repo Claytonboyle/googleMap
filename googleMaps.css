@@ -90,7 +90,7 @@ html, body { height: 100%; margin: 0; padding: 0; }
 }
 
 .autoMargin {
-     /*margin:auto; */
+     margin:auto; 
 }
 
 .topLeftInfoIcon {
@@ -143,6 +143,55 @@ html, body { height: 100%; margin: 0; padding: 0; }
     border-radius:5px;
     padding:.3em;
 }
+
+
+.tableContainer {
+    /*add sytle if nec, otherwise delete*/
+}
+
+.line {
+    border-bottom: 3px solid gray;
+    opacity: .4;
+    height: 0px;
+    margin-bottom: 2%;
+    margin-top: 5%;
+}
+
+td {
+    padding:5px;
+}
+
+.infoBoxTable {
+    margin:auto;
+    font-size:130%;
+    color:gray;
+    margin-top:2%; }
+
+
+
+
+.thumbs {
+    display:inline;
+    font-size:400%;
+}
+
+.thumbsUp {
+    color:green;
+}
+
+.thumbsDown {  
+    color:orange;
+}
+
+
+
+
+
+
+
+
+
+
 
 .modal-dialog {
     position: absolute;

@@ -20,6 +20,7 @@
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/async/1.5.2/async.js"></script>-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="font-awesome-4.5.0/css/font-awesome.min.css">
      <script type = "text/javascript" src="sampleHouses.js"></script>
      <script type="text/javascript" src="testing.js"></script>
         
@@ -35,9 +36,13 @@
       <div class="container-fluid search myNavBar">
 
         <ul class="nav nav-tabs">
+
              <li role="presentation" class="spacer" ><a> <span class="glyphicon glyphicon-home" aria-hidden="true"></span> </a></li>
+
               <li role="presentation" class="spacer"><a data-toggle="modal" data-target="#myModal" ng-click="closeInfoWindow()"> <span class="glyphicon glyphicon-search" aria-hidden="true"></span> </a></li>
+
               <li role="presentation" class="spacer"><a> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> </a></li>
+
               <li role="presentation" class="spacer"><a> <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> </a></li>
         </ul>
 <!---------------------------------->
@@ -83,9 +88,56 @@
           <div class="infoBoxTitle">
             <span class="infoBoxPrice"><strong>${{housePointer["List Price"]}}
             </strong></span><br><strong class="infoBoxAddress">{{addressString}}</strong>
+          </div> <!---end box title-->
 
-          </div><!---end box title-->
-        </div> <!--end infobox-->
+          <!--put a container around the beds/baths, thumbs icons, and SF text in between icons-->
+
+          <!---put the beds and baths in a line here-->
+            <div class="row autoMargin">
+
+                <div class="line col-xs-12"></div>
+
+            </div><!--close the tow of divider line-->
+
+            <div class="row"> 
+
+              <div class="thumbsDown thumbs col-xs-2">
+                 <at data-toggle="modal" data-target="#thumbsUpModal" ng-click="TEST()"> <i class="fa fa-thumbs-down"></i></at>
+              </div>
+
+                  <div class="tableContainer col-xs-8">
+                    <table class="infoBoxTable">
+
+                            <tr>
+                              <td>Beds</td>
+                              <td>{{housePointer["Total Bedrooms"]}}</td> 
+                              
+                              
+                            
+                              <td>Sqft Above</td>   
+                              <td>{{addComma(housePointer["SqFt Above"])}}</td> 
+
+                            </tr>
+                            <tr>
+                              <td>Baths</td>
+                              <td>{{housePointer["Total Baths"]}}</td>
+                              
+                             
+                              <td>Sqft Whole</td> 
+                              <td>{{addComma(housePointer["SqFt Above"])}}</td>    
+                            </tr>
+                            
+                      </table>
+                    </div><!--end tableContianer-->
+
+
+              <div class="thumbsUp thumbs col-xs-2">
+                  <at data-toggle="modal" data-target="#thumbsUpModal" ng-click="TEST()"> <i class="fa fa-thumbs-up"></i></at>
+              </div>
+
+            </div><!---end row-->
+         
+         </div>  <!--end infobox
       </div>
 
       </div> <!--end autoMargin-->

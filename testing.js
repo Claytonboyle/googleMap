@@ -7,11 +7,39 @@ app.factory("houseArrays",["$timeout",function($timeout){
         
     
        var angHouses = sampleHouses;
+       var usersArray = [];
+
+       var UserModel = function(fname,lname,phone,email,preferences,login,password){
+
+            this.fname=fname || "";
+            this.lname=lname || "";
+            this.phone=phone || "";
+            this.email = email || "";
+            this.preferences = preferences;
+            this.login = login;
+            this.password = password;
+       }
+
+       UserModel.prototype.userName = function(){
+            return (this.fname+" "+this.lname);
+       }
+
+
+       var Preferences = function(minPrice,maxPrice,minBeds,minBaths,minTotalSF,propertyType){
+
+            this.minPrice = minPrice || 0;
+            this.maxPrice = maxPrice || 0;
+            this.minBeds = minBeds || 0;
+            this.minBaths = minBaths || 1;
+            this.minTotalSF = minTotalSF || 100;
+            this.propertyType = propertyType || "";
+       }
        
 
         return {
             fakeDB:angHouses,
-
+            userClass:UserModel,
+            preferences:Preferences,
             factoryGeoCoder:function(map){}
         }
 }]);
@@ -29,17 +57,24 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
 	var s=$scope;
     
     //TESTING GROUND
-    s.TEST = function(){
-        alert("THUMBS UP MOTHERFUCKER");
+    s.TEST = function(string){
+        alert("THUMBS "+string+" MOTHERFUCKER");
     }
+        //create one user that we will use as current user
+        s.userCreator = houseArrays["userClass"];
+        s.preferencesCreator = houseArrays["preferences"];
 
+        s.myUserPreferences = new s.preferencesCreator (10000,1000000,1,1,300);
+        s.myUser = new s.userCreator ("Clayton","Boyle",7202389265,"clayton.boyle@gmail.com",s.myUserPreferences,"boylec","kittycats");
+        console.log(s.myUser);
+
+    //create scope alias
     console.log("scope: ",s);
+    //create houses array of all houses from fake DB
     s.angHouses = houseArrays["fakeDB"];
-    
-    console.log(s.angHouses[1]);
-    
+    //blank search string for search city/state field
 	s.searchCity = "";
-        //below I create a new geocoder object
+    //below I create a new geocoder object
     var geocoder = new google.maps.Geocoder();
     //below I create a new marker obj, that is used to delete the previous person marker
     var oldPersonMarker = new google.maps.Marker({position:google.maps.LatLng(0,0)});
@@ -204,14 +239,14 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
 
     }
 
-    //re-enable this function below, just minimizing google marker hits
-    // for (pos in displayMarkerArray){
-    //     displayMarkerArray[pos].setMap(map);
-    // }
-
-    for (var i=0;i<15;i++){
-        displayMarkerArray[i].setMap(map);
+    // re-enable this function below, just minimizing google marker hits
+    for (pos in displayMarkerArray){
+        displayMarkerArray[pos].setMap(map);
     }
+
+    // for (var i=0;i<15;i++){
+    //     displayMarkerArray[i].setMap(map);
+    // }
 
     //here we can edit what going in the info window box
     function createContentString(house) {

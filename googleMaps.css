@@ -67,13 +67,15 @@ html, body { height: 100%; margin: 0; padding: 0; }
 .infoBox {
     
    /* display:inline-block;*/
-    position:absolute;
+    /*position:ab;solute*/
+    position:fixed;
     padding:1em;
     height:25%;
     width:98%;
     background-color:rgba(245,245,220,0.85);
   
-    top:+72%; 
+    /*top:+72%; */
+    top:+70%;
     left:1%; 
     border-radius:8px;
     border:1px solid gray;
@@ -184,20 +186,14 @@ td {
 }
 
 
-
-
-
-
-
-
-
-
-
 .modal-dialog {
+    /*
+    when the screen is the vh/vw, keep defaults
+
     position: absolute;
     width: 90%;
     margin: 10;
-    margin-left: 5%;
+    margin-left: 5%;*/
     margin-top: 25%;
 }
 
@@ -259,6 +255,54 @@ td {
 .glyphicon {
     font-size:xx-large;
 }
+
+
+
+/*
+.infoBox.ng-hide-remove {
+    transition:.5s all;
+    transform:translateY(100%);
+}
+
+.infoBox.ng-hide-add {
+    
+    transform:translateY(0%);
+}
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

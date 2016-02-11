@@ -3,6 +3,7 @@
   <head>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.js"></script>
+   
      <script 
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5ylZNoESDoX9aOsHGMwc-91sK-YpfzQg">
     </script>
@@ -21,7 +22,9 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="font-awesome-4.5.0/css/font-awesome.min.css">
+
      <script type = "text/javascript" src="sampleHouses.js"></script>
+
      <script type="text/javascript" src="testing.js"></script>
         
     
@@ -37,7 +40,7 @@
 
         <ul class="nav nav-tabs">
 
-             <li role="presentation" class="spacer" ><a> <span class="glyphicon glyphicon-home" aria-hidden="true"></span> </a></li>
+             <li role="presentation" class="spacer" ><a data-toggle="modal" data-target="#housePreferencesModal" ng-click="closeInfoWindow()"> <span class="glyphicon glyphicon-home" aria-hidden="true"></span> </a></li>
 
               <li role="presentation" class="spacer"><a data-toggle="modal" data-target="#myModal" ng-click="closeInfoWindow()"> <span class="glyphicon glyphicon-search" aria-hidden="true"></span> </a></li>
 
@@ -71,10 +74,40 @@
                   </div><!--modal content-->
                 </div>
 
-          
+              </div> <!--modal-->
 
-          </form>
-      </div> <!--end header box-->
+
+              <div id="housePreferencesModal" class="modal fade" role="dialog">
+                <div class="modal-dialog modal-sm">
+      
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Adjust Housing Preferences</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+
+                              <input ng-model="searchCity" type="text" class="form-control" placeholder="Search">
+                         </div>  <!--end form group-->
+                    </div><!--end modal body-->
+                    
+                    <div class="modal-footer">
+                        
+                        <button ng-click="consoleCity()" type="submit" data-dismiss="modal" class="btn btn-default">TEST</button>
+                      </div>
+                   </div><!--modal content-->
+                 </div>
+
+               </div> <!--modal-->
+
+
+
+
+
+
+
+
 
          <div id="map" class="myMap"></div>
 
@@ -102,7 +135,7 @@
             <div class="row"> 
 
               <div class="thumbsDown thumbs col-xs-2">
-                 <at data-toggle="modal" data-target="#thumbsUpModal" ng-click="TEST()"> <i class="fa fa-thumbs-down"></i></at>
+                 <at data-toggle="modal" data-target="#thumbsUpModal" ng-click="TEST('DOWN')"> <i class="fa fa-thumbs-down"></i></at>
               </div>
 
                   <div class="tableContainer col-xs-8">
@@ -132,7 +165,7 @@
 
 
               <div class="thumbsUp thumbs col-xs-2">
-                  <at data-toggle="modal" data-target="#thumbsUpModal" ng-click="TEST()"> <i class="fa fa-thumbs-up"></i></at>
+                  <at data-toggle="modal" data-target="#thumbsUpModal" ng-click="TEST('UP')"> <i class="fa fa-thumbs-up"></i></at>
               </div>
 
             </div><!---end row-->

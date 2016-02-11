@@ -259,22 +259,17 @@ td {
 
 
 /*
-.infoBox.ng-hide-remove {
-    transition:.5s all;
-    transform:translateY(100%);
-}
-
-.infoBox.ng-hide-add {
-    
-    transform:translateY(0%);
-}
-
+    slider over ride colors
 */
 
+.angular-range-slider div.handle {
+            background-color: rgb(208, 77, 77);
+            border: 4px solid #C3C0C5;
+}
 
-
-
-
+.angular-range-slider div.bar .selection {
+    background:#337AB7;
+}
 
 
 

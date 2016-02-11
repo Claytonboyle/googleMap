@@ -27,11 +27,11 @@ app.factory("houseArrays",["$timeout",function($timeout){
 
        var Preferences = function(minPrice,maxPrice,minBeds,minBaths,minTotalSF,propertyType,favorites,blacklist){
 
-            this.minPrice = minPrice || 0;
-            this.maxPrice = maxPrice || 0;
+            this.minPrice = minPrice || 40000;
+            this.maxPrice = maxPrice || 40000;
             this.minBeds = minBeds || 0;
             this.minBaths = minBaths || 1;
-            this.minTotalSF = minTotalSF || 100;
+            this.minTotalSF = minTotalSF || 500;
             this.propertyType = propertyType || "";
 
             this.favorites = favorites || new Object();
@@ -67,14 +67,34 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
         s.userCreator = houseArrays["userClass"];
         s.preferencesCreator = houseArrays["preferences"];
 
-        s.myUserPreferences = new s.preferencesCreator (10000,1000000,1,1,300);
+        s.myUserPreferences = new s.preferencesCreator (10000,1000000,0,1,300);
         s.myUser = new s.userCreator ("Clayton","Boyle",7202389265,"clayton.boyle@gmail.com",s.myUserPreferences,"boylec","kittycats");
         console.log(s.myUser);
 
-        //slider attempts
-        s.sliderValue = 200;
-        s.lowerValue = 400;
-        s.upperValue = 600;
+        //slider values, 
+        s.sliderBeds = s.myUser.preferences.minBeds || 0;
+        s.sliderBaths = s.myUser.preferences.minBaths || 1;
+        s.sliderMinSF = s.myUser.preferences.minTotalSF || 500;
+
+        s.sliderMinPrice = s.myUser.preferences.minPrice || 40000;
+        s.sliderMaxPrice = s.myUser.preferences.maxPrice || 40000;
+
+        //prints updated user info, called in criteria modal
+        s.printUser = function () {
+            console.log(s.myUser);}
+        //update current user preferences
+        s.changeCriteria = function(){
+            s.myUser.preferences.minBeds = s.sliderBeds;
+            s.myUser.preferences.minBaths = s.sliderBaths;
+            s.myUser.preferences.minTotalSF = s.sliderMinSF;
+
+            s.myUser.preferences.minPrice = s.sliderMinPrice;
+            s.myUser.preferences.maxPrice = s.sliderMaxPrice;
+
+            s.printUser();
+        }
+
+
 
     //create scope alias
     console.log("scope: ",s);
@@ -219,8 +239,6 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
             var house = s.angHouses[i];
             var lat = house["Latitude"];
             var lng = house["Longitude"];
-            
-            console.log ("house ",house["Latitude"]," ",house["Longitude"]);
             var displayHouseMarker = new google.maps.Marker({
                                 position:{lat:lat,
                                           lng:lng},
@@ -248,13 +266,13 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
     }
 
     // re-enable this function below, just minimizing google marker hits
-    for (pos in displayMarkerArray){
-        displayMarkerArray[pos].setMap(map);
-    }
-
-    // for (var i=0;i<15;i++){
-    //     displayMarkerArray[i].setMap(map);
+    // for (pos in displayMarkerArray){
+    //     displayMarkerArray[pos].setMap(map);
     // }
+
+    for (var i=0;i<15;i++){
+        displayMarkerArray[i].setMap(map);
+    }
 
     //here we can edit what going in the info window box
     function createContentString(house) {
@@ -340,7 +358,9 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
     }
 
     s.addComma =function (num){
-        if (num!=undefined)
+        num = parseInt(num);
+
+        if (num!=undefined && isNaN(num)!=true)
             return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
 
 

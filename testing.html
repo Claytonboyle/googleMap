@@ -19,8 +19,17 @@
       <script type="text/javascript" src="angular-simple-logger.js"></script>
      
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/async/1.5.2/async.js"></script>-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+  <!--
+  <script type="text/javascript" src="bootstrap-slider.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/6.0.16/css/bootstrap-slider.css"></link>
+  -->
+
+  <link rel="stylesheet" type="text/css" href="angular-range-slider.css">
+  <script src="angular-range-slider.js"></script>
+
   <link rel="stylesheet" href="font-awesome-4.5.0/css/font-awesome.min.css">
 
      <script type = "text/javascript" src="sampleHouses.js"></script>
@@ -51,7 +60,7 @@
 <!---------------------------------->
       </div>
               
-
+            <!---search mag glass modal-->
               <div id="myModal" class="modal fade" role="dialog">
                 <div class="modal-dialog modal-sm">
       
@@ -76,7 +85,7 @@
 
               </div> <!--modal-->
 
-
+              <!------------------------------------------------------criteria modal------------------------------>
               <div id="housePreferencesModal" class="modal fade" role="dialog">
                 <div class="modal-dialog modal-sm">
       
@@ -87,14 +96,63 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
+                              <!--add sliders here-->
 
-                              <input ng-model="searchCity" type="text" class="form-control" placeholder="Search">
+                         <!--single slider for min beds-->
+
+                         <p>Value: {{sliderValue}}</p>
+                          <div range-slider
+                               floor="100"
+                               ceiling="1000"
+                               step="50"
+                               precision="2"
+                               highlight="left"
+                               ng-model="sliderValue"></div>
+
+                         <!--single slider for min baths-->
+
+                         <p>Value: {{sliderValue}}</p>
+                          <div range-slider
+                               floor="100"
+                               ceiling="1000"
+                               step="50"
+                               precision="2"
+                               highlight="left"
+                               ng-model="sliderValue"></div>
+
+                       <!--single slider for min total sf-->
+
+                         <p>Value: {{sliderValue}}</p>
+                          <div range-slider
+                               floor="100"
+                               ceiling="1000"
+                               step="50"
+                               precision="2"
+                               highlight="left"
+                               ng-model="sliderValue"></div>
+
+
+                         <!--range slider for price-->     
+                         <p>Lower Value: {{lowerValue}}</p>
+                            <p>Value 2: {{upperValue}}</p>
+                            <div range-slider
+                                 floor="100"
+                                 ceiling="1000"
+                                 dragstop="true"
+                                 ng-model-low="lowerValue"
+                                 ng-model-high="upperValue"></div>
+
+                          <!--add a property type dual check box, allow one or both to be selected-->
+
+
+
+
                          </div>  <!--end form group-->
                     </div><!--end modal body-->
                     
                     <div class="modal-footer">
                         
-                        <button ng-click="consoleCity()" type="submit" data-dismiss="modal" class="btn btn-default">TEST</button>
+                        <button ng-click="consoleCity()" type="submit" data-dismiss="modal" class="btn btn-default">Filter</button>
                       </div>
                    </div><!--modal content-->
                  </div>

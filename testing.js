@@ -1,6 +1,6 @@
 // testing.js
 
-var app = angular.module("googleMap",[]);
+var app = angular.module("googleMap",['angularRangeSlider']);
 
 	
 app.factory("houseArrays",["$timeout",function($timeout){
@@ -67,6 +67,11 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
         s.myUserPreferences = new s.preferencesCreator (10000,1000000,1,1,300);
         s.myUser = new s.userCreator ("Clayton","Boyle",7202389265,"clayton.boyle@gmail.com",s.myUserPreferences,"boylec","kittycats");
         console.log(s.myUser);
+
+        //slider attempts
+        s.sliderValue = 200;
+        s.lowerValue = 400;
+        s.upperValue = 600;
 
     //create scope alias
     console.log("scope: ",s);

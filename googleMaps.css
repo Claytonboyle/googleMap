@@ -189,13 +189,13 @@ td {
 .modal-dialog {
     /*
     when the screen is the vh/vw, keep defaults
-
     position: absolute;
     width: 90%;
     margin: 10;
     margin-left: 5%;*/
-    margin-top: 25%;
+    margin-top: 20%;
 }
+
 
 .modal-backdrop {
     position: absolute;

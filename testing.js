@@ -40,7 +40,8 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
     var personMarker=oldPersonMarker;
 
     //keep track of last opened window
-    var openWindow = new google.maps.InfoWindow()
+    openWindow = new google.maps.InfoWindow()
+
     //infoBox show/hide once more info button is clicked in info window on marker
     s.infoActive = false;
     //create placeholder for map object
@@ -66,7 +67,10 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
         });
 
 	console.log(map);
-
+    
+    s.closeInfoWindow = function(){
+        openWindow.close();
+    }
     s.bodyClick=function(){
         console.log("WE ARE CLICKING");
         s.infoActive=false;}
@@ -207,6 +211,9 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
     function createContentString(house) {
         // var stringContent = "MLS# "+house["MLS Number"]+"\n Price: "+ house["List Price"];
         s.house=house;
+        //adds commas to the price, and puts it back into the house object
+        house["List Price"]= house["List Price"].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+             
         var stringContent = '<div class="infoWindowPrice">'+  
             '<h4><strong>'+
             ' $'+

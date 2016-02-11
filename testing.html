@@ -30,21 +30,13 @@
 
 
   <div class="myContainer">
-
-
-
-
-
-
-
-
                   
 
       <div class="container-fluid search myNavBar">
 
         <ul class="nav nav-tabs">
              <li role="presentation" class="spacer" ><a> <span class="glyphicon glyphicon-home" aria-hidden="true"></span> </a></li>
-              <li role="presentation" class="spacer"><a data-toggle="modal" data-target="#myModal"> <span class="glyphicon glyphicon-search" aria-hidden="true"></span> </a></li>
+              <li role="presentation" class="spacer"><a data-toggle="modal" data-target="#myModal" ng-click="closeInfoWindow()"> <span class="glyphicon glyphicon-search" aria-hidden="true"></span> </a></li>
               <li role="presentation" class="spacer"><a> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> </a></li>
               <li role="presentation" class="spacer"><a> <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> </a></li>
         </ul>
@@ -54,7 +46,7 @@
 
               <div id="myModal" class="modal fade" role="dialog">
                 <div class="modal-dialog modal-sm">
-
+      
                   <!-- Modal content-->
                   <div class="modal-content">
                     <div class="modal-header">
@@ -74,14 +66,7 @@
                   </div><!--modal content-->
                 </div>
 
-            
-
-               <!-- <div class="form-group">
-                  <input ng-model="searchCity" type="text" class="form-control" placeholder="Search">
-               </div>  -->
-
-               <!--end form group-->
-             <!--  <button ng-click="consoleCity()" type="submit" class="btn btn-default">Submit</button> -->
+          
 
           </form>
       </div> <!--end header box-->
@@ -106,7 +91,6 @@
       </div> <!--end autoMargin-->
 
        <!--{{searchCity}}       we don't need this to debug anymore
-
         <button ng-click="newCenter()">Center</button>-->
  
       

@@ -9,7 +9,7 @@ app.factory("houseArrays",["$timeout",function($timeout){
        var angHouses = sampleHouses;
        var usersArray = [];
 
-       var UserModel = function(fname,lname,phone,email,preferences,login,favorites,blacklistlogin,password){
+       var UserModel = function(fname,lname,phone,email,preferences,login,blacklistlogin,password){
 
             this.fname=fname || "";
             this.lname=lname || "";

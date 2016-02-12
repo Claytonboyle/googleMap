@@ -282,12 +282,12 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
         // var stringContent = "MLS# "+house["MLS Number"]+"\n Price: "+ house["List Price"];
         s.house=house;
         //adds commas to the price, and puts it back into the house object
-        house["List Price"]= house["List Price"].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        priceComma=house["List Price"].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
              
         var stringContent = '<div class="infoWindowPrice">'+  
             '<h4><strong>'+
             ' $'+
-            house["List Price"]+
+            priceComma+
             '</strong></h4>'+
             '</div>'+
             '<button class="infoButton" onclick="angular.element(this).scope().moreInfoButton('+ house["MLS Number"] + ')">More Info</button>';
@@ -423,11 +423,11 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
             if (s.myUser.preferences.minTotalSF>testHouse["SqFt Total"])
                 return false;
 
-            
+            //previously used .replace(/,/g , "") to remove commas that were formatted into price
 
-            if (s.myUser.preferences.minPrice>testHouse["List Price"].replace(/,/g , ""))
+            if (s.myUser.preferences.minPrice>testHouse["List Price"])
                 return false;
-            if (s.myUser.preferences.maxPrice<testHouse["List Price"].replace(/,/g , ""))
+            if (s.myUser.preferences.maxPrice<testHouse["List Price"])
                 return false;
             //put blacklist logic here
             return true;

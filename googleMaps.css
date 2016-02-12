@@ -174,19 +174,37 @@ td {
 
 
 .thumbs {
+/*    position:relative;*/
+    
     display:inline;
     font-size:400%;
 }
 
 .thumbsUp {
-    /*color:green;*/
-    color:#337AB7
+    color:#337AB7;
 }
 
-.thumbsDown {  
-    /*color:orange;*/
-    color:#337AB7
+.thumbsUp:active{
+    color:green;
 }
+
+
+.thumbsDown {  
+    color:#337AB7;
+}
+
+.thumbsDown:active{
+    color:rgba(205,0,0,0.7);
+
+}
+
+.agent {
+    text-align:center;
+    color:rgba(205,0,0,0.7);
+    letter-spacing:.1em;
+}
+
+
 
 
 .modal-dialog {

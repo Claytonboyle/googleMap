@@ -69,7 +69,7 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
         s.preferencesCreator = houseArrays["preferences"];
 
         s.myUserPreferences = new s.preferencesCreator (10000,1000000,0,1,300);
-        s.myUser = new s.userCreator ("Clayton","Boyle",7202389265,"clayton.boyle@gmail.com",s.myUserPreferences,"boylec","kittycats");
+        s.myUser = new s.userCreator ("Clayton","Boyle","720-238-9265","clayton.boyle@gmail.com",s.myUserPreferences,"boylec","kittycats");
         console.log(s.myUser);
 
         //slider values, 
@@ -112,6 +112,7 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
                zoom: standardZoom
             });
         }
+    
 
 	initMap();
 
@@ -260,6 +261,10 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
     for (pos in displayMarkerArray){
         displayMarkerArray[pos].setMap(map);
     }
+     //function below just does 15 markers for testing to speed up reloads
+//        for (var i=0;i<15;i++){
+//            displayMarkerArray[i].setMap(map);
+//        }
 
     //call this when you've updated your array of markers to display
     //have the logic done before calling this - black list & criteria
@@ -271,10 +276,6 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
             //     array[pos].setMap(null);
         }
         return ("returning from placeMarkers(array) function")
-    }
-
-    for (var i=0;i<15;i++){
-        displayMarkerArray[i].setMap(map);
     }
 
     //here we can edit what going in the info window box

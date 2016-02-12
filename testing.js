@@ -91,10 +91,17 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
             s.myUser.preferences.minPrice = s.sliderMinPrice;
             s.myUser.preferences.maxPrice = s.sliderMaxPrice;
 
+            //console logs user object
             s.printUser();
+
+            //updates the display Markers array to show preferences.
+            s.updateMarkersDisplayed();
         }
 
+        s.updateMarkersDisplayed = function (){
 
+
+        }
 
     //create scope alias
     console.log("scope: ",s);
@@ -107,16 +114,13 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
     //below I create a new marker obj, that is used to delete the previous person marker
     var oldPersonMarker = new google.maps.Marker({position:google.maps.LatLng(0,0)});
     var personMarker=oldPersonMarker;
-
     //keep track of last opened window
     openWindow = new google.maps.InfoWindow()
-
     //infoBox show/hide once more info button is clicked in info window on marker
     s.infoActive = false;
     //create placeholder for map object
 	var map;
-   
-    //house or apt icon shown
+    //house or apt icon shown, initialize to house
     s.iconPath="home.png";
     //what each map should zoom to
     var standardZoom = 12;
@@ -151,19 +155,14 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
 
 	s.newCenter= function(){
 	// 	console.log(map);
-
 		// map["center"] = {lat:33, lng: -90};
 		// initMap({lat:33, lng: -90});
-
 		var randLat,randLong;
-
 		randLat = Math.random()*180 -90;
 		randLong = Math.random()*360 -180;
 		map.setCenter({lat:randLat, lng: randLong});
         map.setZoom(standardZoom);
-		console.log(randLat,randLong);
-		
-
+		console.log(randLat,randLong);	
 	}	
     
 
@@ -180,12 +179,9 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
                 console.log("Are we in here?");
                 
                 if (status == google.maps.GeocoderStatus.OK) {
-                       
                         console.log("Results[0]"+results[0]);
                         for (attrib in results[0]){
                             console.log(results[0][attrib],attrib);
-
-
                         }
                        
                         map.setCenter(results[0].geometry.location);
@@ -195,11 +191,12 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
                     //put the new position marker in
                      personMarker = new google.maps.Marker({
                          position: results[0].geometry.location,
-                         title:"Here I Am!"
+                         title:"Here I Am!",
+                         //set a person marker here!
+                         icon:"personMarker.png"
                         });
-                    //set oldmarker to the current marker
+                    //set oldmarker to the current marker, then log to double check
                     oldPersonMarker = personMarker;
-                    console.log(personMarker);
                 // To add the marker to the map, call setMap();
                     personMarker.setMap(map);
                 } else {
@@ -239,9 +236,18 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
             var house = s.angHouses[i];
             var lat = house["Latitude"];
             var lng = house["Longitude"];
+
+            var markerImgUrl="";
+
+            if (house["Type"].includes("Detached" || "detached"))
+                markerImgUrl="houseMarker.png";
+            else 
+                markerImgUrl="townhouseMarker1.png"
+
             var displayHouseMarker = new google.maps.Marker({
                                 position:{lat:lat,
                                           lng:lng},
+                                    icon:markerImgUrl,
                                     title:house["MLS Number"],
                                      });
             
@@ -256,7 +262,7 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
 
             displayHouseMarker.infowindow = new google.maps.InfoWindow({
                         // content: contentString,
-                        content:"fart",
+                        content:"",
                        });
             displayHouseMarker.infowindow.setContent(contentString);
 

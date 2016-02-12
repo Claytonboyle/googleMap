@@ -38,10 +38,15 @@ app.factory("houseArrays",["$timeout",function($timeout){
             this.blacklist = blacklist || new Object();
        }
        
+//       var Favorites = function (object){
+//           object["MLS Number"]:object,
+//       }
+//       
 
         return {
             fakeDB:angHouses,
             userClass:UserModel,
+//            favoritesClass:Favorites,
             preferences:Preferences,
             factoryGeoCoder:function(map){}
         }
@@ -60,8 +65,14 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
 	var s=$scope;
     
     //TESTING GROUND
+   
     s.TEST = function(string){
-        alert("THUMBS "+string+" MOTHERFUCKER");
+        alert("THUMBS "+string+" MOFO");
+        if (string=="UP"){
+            if(s.myUser.preferences.favorites[s.housePointer["MLS Number"]]==undefined){
+                s.myUser.preferences.favorites[s.housePointer["MLS Number"]]=angular.copy(s.housePointer);
+                console.log(s.myUser.preferences.favorites);}
+            }
     } //end thumbs up and down alert test
 
         //create one user that we will use as current user

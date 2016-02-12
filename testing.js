@@ -71,9 +71,16 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
         if (string=="UP"){
             if(s.myUser.preferences.favorites[s.housePointer["MLS Number"]]==undefined){
                 s.myUser.preferences.favorites[s.housePointer["MLS Number"]]=angular.copy(s.housePointer);
+                s.myUser.preferences.favorites[s.housePointer["MLS Number"]].addressString = s.createInfoBoxAddressString(s.housePointer);
                 console.log(s.myUser.preferences.favorites);}
             }
     } //end thumbs up and down alert test
+    
+    //clear favorites
+    s.clearFavorites =function (){
+        s.myUser.preferences.favorites={};
+        console.log("Cleared Favorites");
+    }
 
         //create one user that we will use as current user
         s.userCreator = houseArrays["userClass"];

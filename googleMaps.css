@@ -205,7 +205,14 @@ td {
 }
 
 
+.favoritesModal {
+    text-align:center;
+}
 
+.favoritesText {
+    color:#337AB7;
+    letter-spacing:.04em;
+}
 
 .modal-dialog {
     /*

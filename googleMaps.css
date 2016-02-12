@@ -34,8 +34,8 @@ html, body { height: 100%; margin: 0; padding: 0; }
     height:100%;
     width:100%;
     
-    border:3px solid green;
-    
+    /*border:3px solid green;*/
+    border:3px solid #337AB7;
     border-radius:8px;
 
     margin:auto;
@@ -51,8 +51,8 @@ html, body { height: 100%; margin: 0; padding: 0; }
 
 .search {
     width:100%;
-    border:3px solid green;
-
+    /*border:3px solid green;*/
+    border:3px solid #337AB7;
     border-top-right-radius:8px;
     border-top-left-radius:8px;
 }
@@ -152,8 +152,9 @@ html, body { height: 100%; margin: 0; padding: 0; }
 }
 
 .line {
-    border-bottom: 3px solid gray;
-    opacity: .4;
+    /*border-bottom: 3px solid gray;*/    
+    border-bottom:3px solid #337AB7;
+    /*opacity: .4;*/
     height: 0px;
     margin-bottom: 2%;
     margin-top: 5%;
@@ -178,11 +179,13 @@ td {
 }
 
 .thumbsUp {
-    color:green;
+    /*color:green;*/
+    color:#337AB7
 }
 
 .thumbsDown {  
-    color:orange;
+    /*color:orange;*/
+    color:#337AB7
 }
 
 

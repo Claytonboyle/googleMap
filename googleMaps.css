@@ -67,8 +67,8 @@ html, body { height: 100%; margin: 0; padding: 0; }
 .infoBox {
     
    /* display:inline-block;*/
-    /*position:ab;solute*/
-    position:fixed;
+    position:absolute;
+/*    position:fixed;*/
     padding:1em;
     height:25%;
     width:98%;

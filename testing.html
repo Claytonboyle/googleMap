@@ -136,7 +136,7 @@
                             <p>Max Price: {{addComma(sliderMaxPrice) || 0}}</p>
                             <div range-slider
                                  floor="25000"
-                                 ceiling="800000"
+                                 ceiling="1000000"
                                  step="25000"
                                  dragstop="false"
                                  ng-model-low="sliderMinPrice"
@@ -214,7 +214,7 @@
                               
                              
                               <td>Sqft Whole</td> 
-                              <td>{{addComma(housePointer["SqFt Above"])}}</td>    
+                              <td>{{addComma(housePointer["SqFt Total"])}}</td>    
                             </tr>
                             
                       </table>

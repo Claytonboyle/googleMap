@@ -62,7 +62,8 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
     //TESTING GROUND
     s.TEST = function(string){
         alert("THUMBS "+string+" MOTHERFUCKER");
-    }
+    } //end thumbs up and down alert test
+
         //create one user that we will use as current user
         s.userCreator = houseArrays["userClass"];
         s.preferencesCreator = houseArrays["preferences"];
@@ -79,29 +80,9 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
         s.sliderMinPrice = s.myUser.preferences.minPrice || 40000;
         s.sliderMaxPrice = s.myUser.preferences.maxPrice || 40000;
 
-        //prints updated user info, called in criteria modal
-        s.printUser = function () {
-            console.log(s.myUser);}
-        //update current user preferences
-        s.changeCriteria = function(){
-            s.myUser.preferences.minBeds = s.sliderBeds;
-            s.myUser.preferences.minBaths = s.sliderBaths;
-            s.myUser.preferences.minTotalSF = s.sliderMinSF;
-
-            s.myUser.preferences.minPrice = s.sliderMinPrice;
-            s.myUser.preferences.maxPrice = s.sliderMaxPrice;
-
-            //console logs user object
-            s.printUser();
-
-            //updates the display Markers array to show preferences.
-            s.updateMarkersDisplayed();
-        }
-
-        s.updateMarkersDisplayed = function (){
 
 
-        }
+
 
     //create scope alias
     console.log("scope: ",s);
@@ -251,30 +232,46 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
                                     title:house["MLS Number"],
                                      });
             
-            displayHouseMarker.addListener('click', function(){
-                //close the previous inforwindow if still open
-                openWindow.close();
-                //call the display house marker
-                showMLS(house,displayHouseMarker);
-            });
+                    displayHouseMarker.addListener('click', function(){
+                        //close the previous inforwindow if still open
+                        openWindow.close();
+                        //call the display house marker
+                        showMLS(house,displayHouseMarker);
+                     });
             // can add info window to the actual marker before pushing to array rather than creating it on click
             var contentString = createContentString(house);
-
             displayHouseMarker.infowindow = new google.maps.InfoWindow({
                         // content: contentString,
                         content:"",
                        });
+            //attempted to have inforwindow create, then push content in to force a resize and eliminate horiz scroll bar
             displayHouseMarker.infowindow.setContent(contentString);
 
+            //just in case saves the index of the house the marker refers to as a field
+            displayHouseMarker.angHousesIndex = i;
+
+            //we now have an ititial fake db array of houseMarkers, each with a MLS as the title
             displayMarkerArray.push(displayHouseMarker);
         })();//end IIFE
 
     }
 
     // re-enable this function below, just minimizing google marker hits
-    // for (pos in displayMarkerArray){
-    //     displayMarkerArray[pos].setMap(map);
-    // }
+    for (pos in displayMarkerArray){
+        displayMarkerArray[pos].setMap(map);
+    }
+
+    //call this when you've updated your array of markers to display
+    //have the logic done before calling this - black list & criteria
+    function placeMarker(array){
+        for (pos in array){
+            if (array[pos]!=null)
+                array[pos].setMap(map);
+            // else
+            //     array[pos].setMap(null);
+        }
+        return ("returning from placeMarkers(array) function")
+    }
 
     for (var i=0;i<15;i++){
         displayMarkerArray[i].setMap(map);
@@ -369,7 +366,72 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
         if (num!=undefined && isNaN(num)!=true)
             return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
 
+    //changing criteria logic 
 
+            //prints updated user info, called in criteria modal
+        s.printUser = function () {
+            console.log(s.myUser);}
+        //update current user preferences
+        s.changeCriteria = function(){
+            s.myUser.preferences.minBeds = s.sliderBeds;
+            s.myUser.preferences.minBaths = s.sliderBaths;
+            s.myUser.preferences.minTotalSF = s.sliderMinSF;
+
+            s.myUser.preferences.minPrice = s.sliderMinPrice;
+            s.myUser.preferences.maxPrice = s.sliderMaxPrice;
+
+            //console logs user object
+            // s.printUser();
+
+            //updates the display Markers array to show preferences.
+            console.log("Removing all markers from map only.")
+            for (pos in displayMarkerArray){
+                displayMarkerArray[pos].setMap(null);
+            }
+            s.updateMarkersDisplayed();
+        }
+
+        s.updateMarkersDisplayed = function (){
+            //use display marker array to make a new array to pass to the print array function
+            //placeMarkers(array)
+            var trimArray = [];
+            var testHouse = {};
+
+            for (pos in displayMarkerArray){
+                    testHouse = s.angHouses[displayMarkerArray[pos].angHousesIndex];
+                    // console.log(displayHouseMarker);
+                    // console.log("index number ",displayHouseMarker.angHousesIndex);
+                    // console.log("TEST HOUSE: ",testHouse)
+
+                    if (s.houseCheck(testHouse)==true){
+                        trimArray.push(displayMarkerArray[pos]);
+                   
+                }
+                //call the place marker function;
+                placeMarker(trimArray);
+            }
+        } //end updateMarkersDisplayed
+
+        //must use this function, called by updateMarkersDisplayed, to see if house should be displayed or not
+        s.houseCheck = function(testHouse){
+            //return true or false
+            //use s.myUser.preferences and the blacklist to see if it should be shown
+            if (s.myUser.preferences.minBeds>testHouse["Total Bedrooms"])
+                return false;
+            if (s.myUser.preferences.minBaths>testHouse["Total Baths"])
+                return false;
+            if (s.myUser.preferences.minTotalSF>testHouse["SqFt Total"])
+                return false;
+
+            
+
+            if (s.myUser.preferences.minPrice>testHouse["List Price"].replace(/,/g , ""))
+                return false;
+            if (s.myUser.preferences.maxPrice<testHouse["List Price"].replace(/,/g , ""))
+                return false;
+            //put blacklist logic here
+            return true;
+        };
 
 }]);//end controller
 

@@ -303,8 +303,8 @@ app.controller("appController",["$scope","houseArrays",function($scope,houseArra
         //adds commas to the price, and puts it back into the house object
         priceComma=house["List Price"].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
              
-        var stringContent = '<div class="infoWindowPrice">'+  
-            '<h4><strong>'+
+        var stringContent = '<div>'+  
+            '<h4 class="infoWindowPrice"><strong>'+
             ' $'+
             priceComma+
             '</strong></h4>'+
